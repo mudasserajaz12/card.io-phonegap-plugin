@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="com.velocitywebworks.cordova.card.io" version="0.2.3">
+    
+    <name>CardIOPlugin</name>
+    <description>Card.IO Plugin</description>
+    <license>Apache 2.0</license>
+    <keywords>card.io</keywords>
+    
+    <js-module src="www/card.io.js" name="card.io">
+        <clobbers target="cordova.plugins.cardio" />
+    </js-module>
+    
+    <platform name="android">
+            
+        <lib-file src="libs/card.io.jar" arch="device" />
+        <lib-file src="libs/armeabi-v7a" arch="device" />
+        <lib-file src="libs/armeabi" arch="device" />
+        <lib-file src="libs/mips" arch="device" />
+        <lib-file src="libs/x86" arch="device" />
+            
+        <source-file src="src/android/com/velocitywebworks/plugins/cardio/CardIOMain.java" 
+            target-dir="src/com/velocitywebworks/plugins/cardio/" />            
+        <source-file src="src/android/com/velocitywebworks/plugins/cardio/CardIOPlugin.java" 
+            target-dir="src/com/velocitywebworks/plugins/cardio/" />
+                
+        <config-file target="res/xml/config.xml" parent="/*">        
+            <feature name="CardIOPlugin">
+                <param name="android-package" value="com.velocitywebworks.plugins.cardio.CardIOPlugin"/>
+            </feature>
+        </config-file>
+        
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity android:configChanges="orientation|keyboardHidden" android:name="com.velocitywebworks.plugins.cardio.CardIOMain" android:screenOrientation="landscape" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:windowSoftInputMode="stateAlwaysHidden">
+                <intent-filter>
+                    <action android:name="com.velocitywebworks.plugins.cardio.SCAN" />
+                    <category android:name="android.intent.category.DEFAULT" />
+                </intent-filter>
+            </activity>
+            <activity android:name="io.card.payment.CardIOActivity" android:configChanges="keyboardHidden|orientation" />
+            <activity android:name="io.card.payment.DataEntryActivity" />
+            
+            <uses-permission android:name="android.permission.VIBRATE" />
+            <uses-feature android:name="android.hardware.camera" android:required="false" />
+            <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+            <uses-feature android:name="android.hardware.camera.flash" android:required="false" />
+        </config-file>
+        
+    </platform>
+    <platform name="ios">
+        <framework src="libc++.dylib" />        
+        
+        <config-file target="config.xml" parent="/*">
+            <feature name="CardIOPlugin">
+                <param name="ios-package" value="CardIOPlugin"/>
+            </feature>
+        </config-file>
+    
+        <header-file src="src/ios/CardIOViewDelegate.h" />
+        <header-file src="src/ios/CardIO.h" />
+        <header-file src="src/ios/CardIOCreditCardInfo.h" />
+        <header-file src="src/ios/CardIOPaymentViewController.h" />
+        <header-file src="src/ios/CardIOPaymentViewControllerDelegate.h" />
+        <header-file src="src/ios/CardIOPlugin.h" />
+        <header-file src="src/ios/CardIOView.h" />
+        <source-file src="src/ios/CardIOPlugin.m" compiler-flags="-fmodules" />
+        <source-file src="libs/libCardIO.a" framework="true" compiler-flags="-fmodules" />
+    </platform>
+</plugin>
