@@ -65,4 +65,4 @@ Notes
 -----
 * Generic Phone Gap plug-in installation instructions are available at https://build.phonegap.com/docs/plugins-using
 
-Questions? Contact `info@cubettech.com`.
+Questions? Contact `mudasserajaz12@github.com`.
