@@ -65,5 +65,6 @@
         <header-file src="src/ios/CardIOPlugin.h" />
         <header-file src="src/ios/CardIOView.h" />
         <source-file src="src/ios/CardIOPlugin.m" compiler-flags="-fmodules" />
+        <source-file src="libs/libCardIO.a" framework="true" compiler-flags="-fmodules" />
     </platform>
 </plugin>
